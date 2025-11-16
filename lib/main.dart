@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_recipe_app/core/presentation/components/big_button.dart';
 import 'package:flutter_recipe_app/core/presentation/components/filter_button.dart';
 import 'package:flutter_recipe_app/core/presentation/components/rating_button.dart';
+import 'package:flutter_recipe_app/core/presentation/components/two_tab.dart';
 
 import 'core/presentation/components/input_field.dart';
 import 'core/presentation/components/medium_button.dart';
@@ -54,6 +55,13 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Home Page')),
       body: ListView(
         children: [
+          TwoTab(
+            labels: ['Label 1', 'Label 2'],
+            selectedIndex: 1,
+            onChange: (index) {
+              print('Index: $index');
+            },
+          ),
           RatingButton('Text'),
           RatingButton('Text', isSelected: true),
           FilterButton('Text'),
