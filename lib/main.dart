@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_recipe_app/core/presentation/components/big_button.dart';
 
+import 'core/presentation/components/medium_button.dart';
+import 'core/presentation/components/small_button.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -43,12 +46,36 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-      ),
+      appBar: AppBar(title: const Text('Home Page')),
       body: ListView(
-        children: const[
-          BigButton()
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BigButton(
+              'Big Button',
+              onPressed: () {
+                print('Button pressed');
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MediumButton(
+              'Medium Button',
+              onPressed: () {
+                print('Button pressed');
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SmallButton(
+              'Small Button',
+              onPressed: () {
+                print('Button pressed');
+              },
+            ),
+          ),
         ],
       ),
     );
