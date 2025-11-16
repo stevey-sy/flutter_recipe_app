@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_recipe_app/core/presentation/components/big_button.dart';
 
+import 'core/presentation/components/input_field.dart';
 import 'core/presentation/components/medium_button.dart';
 import 'core/presentation/components/small_button.dart';
 
@@ -32,7 +33,9 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+        ),
         useMaterial3: true,
       ),
       home: const HomePage(),
@@ -74,6 +77,14 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 print('Button pressed');
               },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InputField(
+              label: 'Label',
+              placeholder: 'placeholder',
+              controller: TextEditingController(),
             ),
           ),
         ],
