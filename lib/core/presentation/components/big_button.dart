@@ -6,7 +6,11 @@ class BigButton extends StatefulWidget {
   final String text;
   final void Function() onPressed;
 
-  const BigButton(this.text, {super.key, required this.onPressed});
+  const BigButton(
+    this.text, {
+    super.key,
+    required this.onPressed,
+  });
 
   @override
   State<BigButton> createState() => _BigButtonState();
@@ -38,7 +42,9 @@ class _BigButtonState extends State<BigButton> {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: isPressed ? ColorStyles.gray4 : ColorStyles.primary100,
+          color: isPressed
+              ? ColorStyles.gray4
+              : ColorStyles.primary100,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,8 +58,12 @@ class _BigButtonState extends State<BigButton> {
                 ),
               ),
             ),
-            SizedBox(width: 11),
-            Icon(Icons.arrow_forward, size: 20, color: ColorStyles.white),
+            // SizedBox(width: 11),
+            Icon(
+              Icons.arrow_forward,
+              size: 20,
+              color: ColorStyles.white,
+            ),
           ],
         ),
       ),
