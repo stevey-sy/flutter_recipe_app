@@ -4,6 +4,11 @@ import 'package:flutter_recipe_app/core/presentation/components/filter_button.da
 import 'package:flutter_recipe_app/core/presentation/components/rating_button.dart';
 import 'package:flutter_recipe_app/core/presentation/components/two_tab.dart';
 import 'package:flutter_recipe_app/core/presentation/dialogs/rating_dialog.dart';
+import 'package:flutter_recipe_app/data/repository/mock_bookmark_repository.dart';
+import 'package:flutter_recipe_app/data/repository/mock_reipe_repository_impl.dart';
+import 'package:flutter_recipe_app/domain/model/recipe.dart';
+import 'package:flutter_recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
+import 'package:flutter_recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:flutter_recipe_app/presentation/sign_in/sign_in_screen.dart';
 
 import 'core/presentation/components/input_field.dart';
@@ -23,27 +28,34 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
+        colorScheme: const ColorScheme.light(),
+        scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
       ),
-      home: const SignInScreen(),
+      home: FutureBuilder(
+        future: GetSavedRecipesUseCase(
+          recipeRepository: MockRecipeRepositoryImpl(),
+          bookmarkRepository: MockBookmarkRepositoryImpl(),
+        ).execute(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState ==
+              ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          }
+          if (snapshot.hasData) {
+            final recipes = snapshot.data!;
+            return SavedRecipesScreen(recipes: recipes);
+          }
+          return Center(child: Text('No data'));
+        },
+      ),
     );
   }
 }
