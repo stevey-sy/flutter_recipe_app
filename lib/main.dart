@@ -3,6 +3,8 @@ import 'package:flutter_recipe_app/core/presentation/components/big_button.dart'
 import 'package:flutter_recipe_app/core/presentation/components/filter_button.dart';
 import 'package:flutter_recipe_app/core/presentation/components/rating_button.dart';
 import 'package:flutter_recipe_app/core/presentation/components/two_tab.dart';
+import 'package:flutter_recipe_app/core/presentation/dialogs/rating_dialog.dart';
+import 'package:flutter_recipe_app/presentation/sign_in/sign_in_screen.dart';
 
 import 'core/presentation/components/input_field.dart';
 import 'core/presentation/components/medium_button.dart';
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const SignInScreen(),
     );
   }
 }
@@ -55,9 +57,25 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Home Page')),
       body: ListView(
         children: [
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => RatingDialog(
+                  title: 'Rate recipe',
+                  score: 3,
+                  actionName: 'send',
+                  onChange: (int score) {
+                    print('Score: $score');
+                  },
+                ),
+              );
+            },
+            child: const Text('Show Rating Dialog'),
+          ),
           TwoTab(
             labels: ['Label 1', 'Label 2'],
-            selectedIndex: 1,
+            selectedIndex: 0,
             onChange: (index) {
               print('Index: $index');
             },
