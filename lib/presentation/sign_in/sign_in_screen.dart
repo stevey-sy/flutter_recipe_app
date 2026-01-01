@@ -5,7 +5,13 @@ import 'package:flutter_recipe_app/ui/color_styles.dart';
 import 'package:flutter_recipe_app/ui/text_styles.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  final VoidCallback onTapSignUp;
+  final VoidCallback onTapSignIn;
+  const SignInScreen({
+    super.key,
+    required this.onTapSignUp,
+    required this.onTapSignIn,
+  });
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -65,7 +71,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                   ),
                   const SizedBox(height: 25),
-                  BigButton('Sign In', onPressed: () {}),
+                  BigButton(
+                    'Sign In',
+                    onPressed: widget.onTapSignIn,
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment:
@@ -123,13 +132,16 @@ class _SignInScreenState extends State<SignInScreen> {
                               color: ColorStyles.black,
                             ),
                       ),
-                      Text(
-                        ' Sign up',
-                        style: TextStyles.smallerTextBold
-                            .copyWith(
-                              color:
-                                  ColorStyles.secondary100,
-                            ),
+                      GestureDetector(
+                        onTap: widget.onTapSignUp,
+                        child: Text(
+                          ' Sign up',
+                          style: TextStyles.smallerTextBold
+                              .copyWith(
+                                color: ColorStyles
+                                    .secondary100,
+                              ),
+                        ),
                       ),
                     ],
                   ),
