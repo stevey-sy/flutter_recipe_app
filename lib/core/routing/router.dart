@@ -4,20 +4,28 @@ import 'package:flutter_recipe_app/data/repository/mock_reipe_repository_impl.da
 import 'package:flutter_recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
 import 'package:flutter_recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:flutter_recipe_app/presentation/sign_in/sign_in_screen.dart';
+import 'package:flutter_recipe_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:flutter_recipe_app/presentation/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart'
-    show GoRouter, GoRoute;
+    show GoRouter, GoRoute, GoRouterHelper;
 
 final router = GoRouter(
-  initialLocation: '/Splash',
+  // initialLocation: '/Splash',
+  initialLocation: '/SignUp',
   routes: [
     GoRoute(
       path: '/Splash',
-      builder: (context, state) => SplashScreen(),
+      builder: (context, state) => SplashScreen(
+        onStartCooking: () => context.go('/SignIn'),
+      ),
     ),
     GoRoute(
       path: '/SignIn',
       builder: (context, state) => SignInScreen(),
+    ),
+    GoRoute(
+      path: '/SignUp',
+      builder: (context, state) => SignUpScreen(),
     ),
     GoRoute(
       path: '/SavedRecipes',
