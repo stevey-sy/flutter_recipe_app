@@ -1,6 +1,12 @@
-import 'package:flutter_recipe_app/domain/model/recipe.dart';
+// ignore_for_file: annotate_overrides
 
-class SavedRecipesState {
+import 'package:flutter_recipe_app/domain/model/recipe.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'saved_recipes_state.freezed.dart';
+
+@freezed
+class SavedRecipesState with _$SavedRecipesState {
   final List<Recipe> recipes;
   final bool isLoading;
 
@@ -8,14 +14,4 @@ class SavedRecipesState {
     this.recipes = const [],
     this.isLoading = false,
   });
-
-  SavedRecipesState copyWith({
-    List<Recipe>? recipes,
-    bool? isLoading,
-  }) {
-    return SavedRecipesState(
-      recipes: recipes ?? this.recipes,
-      isLoading: isLoading ?? this.isLoading,
-    );
-  }
 }

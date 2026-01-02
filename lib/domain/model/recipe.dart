@@ -1,6 +1,14 @@
-import 'recipe_ingredient.dart';
+// ignore_for_file: annotate_overrides
 
-class Recipe {
+import 'recipe_ingredient.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'recipe.freezed.dart';
+part 'recipe.g.dart';
+
+@freezed
+@JsonSerializable()
+class Recipe with _$Recipe {
   final int id;
   final String category;
   final String name;
@@ -21,44 +29,8 @@ class Recipe {
     required this.ingredients,
   });
 
-  factory Recipe.fromJson(Map<String, dynamic> json) {
-    return Recipe(
-      id: json['id'] as int,
-      category: json['category'] as String,
-      name: json['name'] as String,
-      image: json['image'] as String,
-      chef: json['chef'] as String,
-      time: json['time'] as String,
-      rating: (json['rating'] as num).toDouble(),
-      ingredients:
-          (json['ingredients'] as List<dynamic>?)
-              ?.map(
-                (item) => RecipeIngredient.fromJson(
-                  item as Map<String, dynamic>,
-                ),
-              )
-              .toList() ??
-          [],
-    );
-  }
+  factory Recipe.fromJson(Map<String, Object?> json) =>
+      _$RecipeFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'category': category,
-      'name': name,
-      'image': image,
-      'chef': chef,
-      'time': time,
-      'rating': rating,
-      'ingredients': ingredients
-          .map((item) => item.toJson())
-          .toList(),
-    };
-  }
-
-  @override
-  String toString() {
-    return 'Recipe(id: $id, category: $category, name: $name, image: $image, chef: $chef, time: $time, rating: $rating, ingredients: ${ingredients.length})';
-  }
+  Map<String, Object?> toJson() => _$RecipeToJson(this);
 }
