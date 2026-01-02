@@ -2,7 +2,7 @@ import 'package:flutter_recipe_app/domain/repository/bookmark_repository.dart';
 
 class MockBookmarkRepositoryImpl
     implements BookmarkRepository {
-  final _ids = <int>{2, 3, 4, 5, 6};
+  final _ids = <int>{2, 3};
 
   @override
   Future<void> clear() async {

@@ -5,6 +5,7 @@ import 'package:flutter_recipe_app/ui/text_styles.dart';
 
 class SavedRecipesScreen extends StatelessWidget {
   final List<Recipe> recipes;
+
   const SavedRecipesScreen({
     super.key,
     required this.recipes,

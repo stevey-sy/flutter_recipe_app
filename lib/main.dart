@@ -9,7 +9,7 @@ import 'package:flutter_recipe_app/data/repository/mock_bookmark_repository.dart
 import 'package:flutter_recipe_app/data/repository/mock_reipe_repository_impl.dart';
 import 'package:flutter_recipe_app/domain/model/recipe.dart';
 import 'package:flutter_recipe_app/domain/use_case/get_saved_recipes_use_case.dart';
-import 'package:flutter_recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
+import 'package:flutter_recipe_app/presentation/saved_recipes/screen/saved_recipes_screen.dart';
 import 'package:flutter_recipe_app/presentation/sign_in/sign_in_screen.dart';
 
 import 'core/presentation/components/input_field.dart';
