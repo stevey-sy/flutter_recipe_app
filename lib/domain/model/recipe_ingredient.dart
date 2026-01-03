@@ -7,7 +7,7 @@ part 'recipe_ingredient.freezed.dart';
 part 'recipe_ingredient.g.dart';
 
 @freezed
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class RecipeIngredient with _$RecipeIngredient {
   final Ingredient ingredient;
   final int amount;

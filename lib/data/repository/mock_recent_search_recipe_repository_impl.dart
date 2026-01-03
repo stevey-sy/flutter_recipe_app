@@ -1,28 +1,38 @@
-import 'package:flutter_recipe_app/data/data_source/remote/recipe_data_source.dart';
+import 'package:flutter_recipe_app/domain/data_source/local_storage.dart';
 import 'package:flutter_recipe_app/domain/model/recipe.dart';
 import 'package:flutter_recipe_app/domain/repository/recent_search_repository.dart';
 
 class MockRecentSearchRecipeRepositoryImpl
     implements RecentSearchRepository {
-  final RecipeDataSource _recipeDataSource;
+  final LocalStorage _localStorage;
 
   const MockRecentSearchRecipeRepositoryImpl({
-    required RecipeDataSource recipeDataSource,
-  }) : _recipeDataSource = recipeDataSource;
+    required LocalStorage localStorage,
+  }) : _localStorage = localStorage;
 
   @override
   Future<List<Recipe>> getRecentSearches() async {
-    final recipes = await _recipeDataSource.getRecipes();
-    return recipes
-        .map<Recipe>((recipe) => Recipe.fromJson(recipe))
-        .toList();
+    try {
+      final json = await _localStorage.load();
+      return json['recipes']
+              ?.map<Recipe>(
+                (recipe) => Recipe.fromJson(recipe),
+              )
+              .toList() ??
+          [];
+    } on Exception catch (e) {
+      return [];
+    }
   }
 
   @override
   Future<void> updateRecentSearchRecipes(
     List<Recipe> recentRecipes,
-  ) {
-    // TODO: implement updateRecentSearchRecipes
-    throw UnimplementedError();
+  ) async {
+    await _localStorage.save({
+      'recipes': recentRecipes.map(
+        (recipe) => recipe.toJson(),
+      ),
+    });
   }
 }

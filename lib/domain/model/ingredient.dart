@@ -17,7 +17,7 @@ part 'ingredient.g.dart';
 // }
 
 @freezed
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Ingredient with _$Ingredient {
   final int id;
   final String name;

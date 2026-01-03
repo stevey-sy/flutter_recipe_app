@@ -7,7 +7,7 @@ part 'recipe.freezed.dart';
 part 'recipe.g.dart';
 
 @freezed
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Recipe with _$Recipe {
   final int id;
   final String category;

@@ -16,6 +16,6 @@ RecipeIngredient _$RecipeIngredientFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$RecipeIngredientToJson(RecipeIngredient instance) =>
     <String, dynamic>{
-      'ingredient': instance.ingredient,
+      'ingredient': instance.ingredient.toJson(),
       'amount': instance.amount,
     };

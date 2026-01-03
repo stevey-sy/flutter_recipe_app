@@ -11,7 +11,9 @@ class SearchViewModel with ChangeNotifier {
     required RecentSearchRepository recentSearchRepository,
     required SearchRecipesUseCase searchRecipesUseCase,
   }) : _recentSearchRepository = recentSearchRepository,
-       _searchRecipesUseCase = searchRecipesUseCase;
+       _searchRecipesUseCase = searchRecipesUseCase {
+    _loadRecentSearchRecipes();
+  }
 
   SearchState _state = SearchState();
   // getter
