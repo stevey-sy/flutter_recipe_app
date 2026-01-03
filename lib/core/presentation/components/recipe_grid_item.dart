@@ -3,9 +3,9 @@ import 'package:flutter_recipe_app/domain/model/recipe.dart';
 import 'package:flutter_recipe_app/ui/color_styles.dart';
 import 'package:flutter_recipe_app/ui/text_styles.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeGridItem extends StatelessWidget {
   final Recipe recipe;
-  const RecipeCard({super.key, required this.recipe});
+  const RecipeGridItem({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +13,13 @@ class RecipeCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Stack(
         children: [
-          AspectRatio(
-            aspectRatio: 315 / 150,
-            child: Container(
-              decoration: BoxDecoration(
-                color: ColorStyles.gray4,
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: NetworkImage(recipe.image),
-                  fit: BoxFit.cover,
-                ),
+          Container(
+            decoration: BoxDecoration(
+              color: ColorStyles.gray4,
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: NetworkImage(recipe.image),
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -44,37 +41,6 @@ class RecipeCard extends StatelessWidget {
                   'By ${recipe.chef}',
                   style: TextStyles.smallerTextRegular
                       .copyWith(color: ColorStyles.white),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 10,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.alarm,
-                  color: ColorStyles.white,
-                  size: 17,
-                ),
-                SizedBox(width: 5),
-                Text(
-                  recipe.time,
-                  style: TextStyles.smallerTextRegular
-                      .copyWith(color: ColorStyles.white),
-                ),
-                SizedBox(width: 20),
-                ClipOval(
-                  child: Container(
-                    color: ColorStyles.white,
-                    padding: EdgeInsets.all(3),
-                    child: Icon(
-                      Icons.bookmark_border_outlined,
-                      color: ColorStyles.primary80,
-                      size: 16,
-                    ),
-                  ),
                 ),
               ],
             ),
